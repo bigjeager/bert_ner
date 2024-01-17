@@ -5,8 +5,9 @@ import torch
 class ConllDataset:
     def __init__(self, config):
         self.home_path = config['home_path']
-        self.model_name = config['model_name']
-        self.tokenizer = BertTokenizerFast.from_pretrained(self.home_path + self.model_name)
+        self.model_path = config['model_path']
+        self.data_path = config['data_path']
+        self.tokenizer = BertTokenizerFast.from_pretrained(self.home_path + self.model_path)
 
     def tokenize(self, batch):
         result = {
@@ -52,7 +53,7 @@ class ConllDataset:
         return input
     
     def get_data(self):
-        train_dataset, test_dataset, validation_dateaset = load_dataset(self.home_path + 'data/conll2003', split=['train', 'test', 'validation'])
+        train_dataset, test_dataset, validation_dateaset = load_dataset(self.home_path + self.data_path, split=['train', 'test', 'validation'])
         train_dataset = self.process(train_dataset)
         test_dataset = self.process(test_dataset)
         validation_dateaset = self.process(validation_dateaset)
@@ -61,5 +62,6 @@ class ConllDataset:
 if __name__ == "__main__":
     config = {"home_path": "HOME_PATH_CONTAINS_MODEL_AND_DATA", "model_name": "models/bert-base-cased"}
     train_dataset, test_dataset, validation_dataset = ConllDataset(config).get_data()
-    print(train_dataset[0])
     
+    valid_loader = torch.utils.data.DataLoader(validation_dataset, batch_size=32)
+    valid_loader.len
