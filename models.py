@@ -51,8 +51,20 @@ class BertNerSoftmax(BertPreTrainedModel):
         )
 
         sequence_output = outputs[0]
-
         sequence_output = self.dropout(sequence_output)
-        logits = self.classifier(sequence_output)
+        # (batch_size, seq_len, num_labels) => (batch_size * seq_len, num_labels)
+        logits = self.classifier(sequence_output).view(-1, self.num_labels)
 
-        return logits
+        # (batch_size, seq_len) => (batch_size*seq_len,)
+        attention_mask = attention_mask.view(-1)
+        labels = labels.view(-1)
+
+        loss_fct = nn.CrossEntropyLoss()
+        # != -100: other sub_token\[CLS]\[SEP]\[PAD]
+        # attention_mask = 1: valid sentense
+        filter_ignored = (labels != -100) & (attention_mask == 1)
+        active_logits = logits[filter_ignored, :]
+        active_labels = labels[filter_ignored]
+
+        loss = loss_fct(active_logits, active_labels)
+        return loss, active_logits, active_labels
