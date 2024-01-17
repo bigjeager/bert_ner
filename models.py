@@ -1,21 +1,13 @@
 from transformers import BertPreTrainedModel, BertModel
-from transformers.modeling_outputs import  TokenClassifierOutput
 from torch import nn
-from torch.nn import CrossEntropyLoss
-import torch
 
 class BertNerSoftmax(BertPreTrainedModel):
-
-    _keys_to_ignore_on_load_unexpected = [r"pooler"]
-
     def __init__(self, config):
         super().__init__(config)
         self.num_labels = config.num_labels
-
         self.bert = BertModel(config, add_pooling_layer=False)
         self.dropout = nn.Dropout(config.hidden_dropout_prob)
         self.classifier = nn.Linear(config.hidden_size, config.num_labels)
-
         self.init_weights()
 
     def forward(
