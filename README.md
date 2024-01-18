@@ -1,7 +1,7 @@
 # bert_ner
 Experimental Reproduction of CoNLL-2003 NER in BERT paper
 
-# bert_ner_finetune.py
+# BERT_TOKEN_SOFTMAX
 In the input to BERT, we use a **case-preserving WordPiece** model, and we include the maximal document context provided by the data. Following standard practice, we formulate this as a tagging task but do not use a CRF layer in the output. We use the representation of the **first sub-token** as the input to the token-level classifier over the NER label set.
 
 ## Result
