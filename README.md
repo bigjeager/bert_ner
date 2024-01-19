@@ -18,9 +18,7 @@ Experimental Reproduction of CoNLL-2003 NER in BERT paper
 
 # FineTune based
 ## FT_TOKEN_SOFTMAX
-```
 In the input to BERT, we use a **case-preserving WordPiece** model, and we include the maximal document context provided by the data. Following standard practice, we formulate this as a tagging task but do not use a CRF layer in the output. We use the representation of the **first sub-token** as the input to the token-level classifier over the NER label set.
-```
 
 ## Result
 | type | f1 | val |
@@ -36,9 +34,7 @@ In the input to BERT, we use a **case-preserving WordPiece** model, and we inclu
 | total | 42770 | 1842 | 1307 | 1342 | 751 | 1838 | 257 | 922 | 346 |
 
 # Feature based
-```
-we apply the feature-based approach by extracting the activa- tions from one or more layers without fine-tuning any parameters of BERT. These contextual embeddings are used as input to a randomly initialized two-layer 768-dimensional BiLSTM before the classification layer.
-```
+we apply the feature-based approach by extracting the activations from one or more layers without fine-tuning any parameters of BERT. These contextual embeddings are used as input to a randomly initialized two-layer 768-dimensional BiLSTM before the classification layer.
 
 ## Result
 | model | source | f1 |
