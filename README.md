@@ -28,7 +28,7 @@ The following results are all based on the hyperparameters above, run only once 
 
 # FineTune based
 ## FT_TOKEN_SOFTMAX
-"In the input to BERT, we use a **case-preserving WordPiece** model, and we include the maximal document context provided by the data. Following standard practice, we formulate this as a tagging task but do not use a CRF layer in the output. We use the representation of the **first sub-token** as the input to the token-level classifier over the NER label set."
+PAPER: "In the input to BERT, we use a **case-preserving WordPiece** model, and we include the **maximal document context** provided by the data. Following standard practice, we formulate this as a tagging task but do not use a CRF layer in the output. We use the representation of the **first sub-token** as the input to the token-level classifier over the NER label set."
 
 ## Result
 | source | f1 | diff |
@@ -44,7 +44,7 @@ The following results are all based on the hyperparameters above, run only once 
 | total | 42770 | 1842 | 1307 | 1342 | 751 | 1838 | 257 | 922 | 346 |
 
 # Feature based
-"we apply the feature-based approach by extracting the activations from one or more layers without fine-tuning any parameters of BERT. These contextual embeddings are used as input to a randomly initialized two-layer 768-dimensional BiLSTM before the classification layer."
+PAPER: "we apply the feature-based approach by extracting the activations from one or more layers without fine-tuning any parameters of BERT. These contextual embeddings are used as input to a randomly initialized two-layer 768-dimensional BiLSTM before the classification layer."
 
 ## Result
 | model | source | f1 | diff |
@@ -63,6 +63,6 @@ The following results are all based on the hyperparameters above, run only once 
 | FEA_SUM_TWELVE | paper | 95.5 |  |
 
 # CONCLUSION
-The reproduction result aligns with the paper, **FT_TOKEN_SOFTMAX(finetune based model)** is the best one and **FEA_LAST_FOUR_CONCAT(feature based model with top four hidden layer concat)** is little behind. But the best reproduction results of them are 0.32~0.33 F1 score behind the results in the paper.
+PAPER: "The best performing method concatenates the token representations from the top four hidden layers of the pre-trained Transformer, which is only 0.3 F1 behind fine-tuning the entire model"
 
-"The best performing method concatenates the token representations from the top four hidden layers of the pre-trained Transformer, which is only 0.3 F1 behind fine-tuning the entire model"
+The reproduction result aligns with the paper, **FT_TOKEN_SOFTMAX(finetune based model)** is the best one and **FEA_LAST_FOUR_CONCAT(feature based model with top four hidden layer concat)** is little behind. But the best results of the reproduction are 0.32~0.33 F1 score behind the results in the paper. The reason is maybe we didn't use **document context** (as described in FT_TOKEN_SOFTMAX) which is not included in the [conll2003](https://huggingface.co/datasets/conll2003) datasets we find in huggingface.
