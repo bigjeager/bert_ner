@@ -44,6 +44,7 @@ PAPER: "In the input to BERT, we use a **case-preserving WordPiece** model, and 
 | total | 42770 | 1842 | 1307 | 1342 | 751 | 1838 | 257 | 922 | 346 |
 
 confusion matrix
+
 ![individualImage](https://github.com/bigjeager/bert_ner/assets/60964665/ecdbc2af-a35d-4898-ad0e-1b1cddb6b52d)
 
 # Feature based
