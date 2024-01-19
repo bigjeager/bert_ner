@@ -4,7 +4,7 @@ Experimental Reproduction of CoNLL-2003 NER in BERT paper
 # USEAGE
 1. git clone all the code and data into **WORK\_HOME\_PATH**
 2. change **WORK\_HOME\_PATH** to your actual folder
-3. download bert ckpt from huggingface to **WORK\_HOME\_PATH**/model_name
+3. download [bert-base-cased](https://huggingface.co/bert-base-cased) ckpt from huggingface to **WORK\_HOME\_PATH**/model_name
 
 # MODELS
 | models | type | features |
@@ -24,7 +24,7 @@ Experimental Reproduction of CoNLL-2003 NER in BERT paper
 - "weight_decay": 0.01
 - "weight_balance": True
 
-The following results are all based on the hyperparameters above, run only once on 4-V100
+The following results are all based on the hyperparameters above, run only once on 4-V100 with [bert-base-cased](https://huggingface.co/bert-base-cased).
 
 # FineTune based
 ## FT_TOKEN_SOFTMAX
