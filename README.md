@@ -6,6 +6,7 @@ Experimental Reproduction of CoNLL-2003 NER in BERT paper
 2. change **WORK\_HOME\_PATH** to your actual folder
 3. download bert ckpt from huggingface to **WORK\_HOME\_PATH**/model_name
 
+# MODELS
 | models | type | features |
 | --- | --- | --- |
 | FT_TOKEN_SOFTMAX | finetune based | first subtoken |
