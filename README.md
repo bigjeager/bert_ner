@@ -43,6 +43,9 @@ PAPER: "In the input to BERT, we use a **case-preserving WordPiece** model, and 
 | f1 | 0.9953 | 0.9644 | 0.9881 | 0.9199 | 0.9006 | 0.9639 | 0.9158 | 0.9114 | 0.8418 |
 | total | 42770 | 1842 | 1307 | 1342 | 751 | 1838 | 257 | 922 | 346 |
 
+confusion matrix
+![individualImage](https://github.com/bigjeager/bert_ner/assets/60964665/ecdbc2af-a35d-4898-ad0e-1b1cddb6b52d)
+
 # Feature based
 PAPER: "we apply the feature-based approach by extracting the activations from one or more layers without fine-tuning any parameters of BERT. These contextual embeddings are used as input to a randomly initialized two-layer 768-dimensional BiLSTM before the classification layer."
 
