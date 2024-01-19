@@ -2,9 +2,9 @@
 Experimental Reproduction of CoNLL-2003 NER in BERT paper
 
 # USEAGE
-1. git clone all the code and data into **\$WORK\_HOME\_PATH\$**
-2. change **\$WORK\_HOME\_PATH\$** to your actual folder
-3. download bert ckpt from huggingface to **\$WORK\_HOME\_PATH\$**/model_name
+1. git clone all the code and data into **WORK\_HOME\_PATH**
+2. change **WORK\_HOME\_PATH** to your actual folder
+3. download bert ckpt from huggingface to **WORK\_HOME\_PATH**/model_name
 
 | models | type | features |
 | --- | --- | --- |
