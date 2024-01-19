@@ -189,25 +189,6 @@ class BertNer(L.LightningModule):
         f1_cnt_table = self.log_table_f1_and_cnt(torch.vstack([f1_map['precision'], f1_map['recall'], f1_map['f1'], torch.sum(f1_map['cm'], dim=-1)]))
         self.logger.experiment.add_text("statistics", f1_cnt_table, self.current_epoch)
 
-    def validation_epoch_end_memory_issue(self, validation_step_outputs):
-        all_val_out = self.all_gather(validation_step_outputs)
-        if self.trainer.is_global_zero:
-            labels = []
-            preds  = []
-            masks = []
-            for outputs in all_val_out:
-                labels.append(outputs[0])
-                preds.append(outputs[1])
-                masks.append(outputs[2])
-            
-            labels = torch.cat(labels).view(-1).cpu().detach().numpy()
-            preds = torch.cat(preds).view(-1).cpu().detach().numpy()
-            masks = torch.cat(masks).view(-1).cpu().detach().numpy()
-
-            print(classification_report(labels[masks], preds[masks], digits=4, labels=list(range(1,9))))
-            print(confusion_matrix(labels[masks], preds[masks], labels=list(range(0, 9))))
-        self.trainer.strategy.barrier()
-
     def configure_optimizers(self):
         decay = []
         no_decay = []
@@ -268,7 +249,7 @@ if __name__ == "__main__":
             trainer = L.Trainer(max_epochs=hyper_params['n_epochs'], logger=logger, log_every_n_steps=1, accelerator='gpu', devices="auto")
             trainer.fit(model, train_loader, valid_loader)
     else:
-        ret_checkpoint = "colln2003/logs/lightning_logs/version_3/checkpoints/epoch=0-step=110.ckpt"
+        ret_checkpoint = "PATH_TO_CKPT_FILE"
         model = BertNer.load_from_checkpoint(path_config['home_path'] + ret_checkpoint, path_config = path_config, hyper_params = hyper_params)
         trainer = L.Trainer(max_epochs=1, logger=logger, log_every_n_steps=1, accelerator='gpu', devices="auto")
         #trainer.validate(model, valid_loader)
