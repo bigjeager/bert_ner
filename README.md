@@ -22,10 +22,10 @@ Experimental Reproduction of CoNLL-2003 NER in BERT paper
 In the input to BERT, we use a **case-preserving WordPiece** model, and we include the maximal document context provided by the data. Following standard practice, we formulate this as a tagging task but do not use a CRF layer in the output. We use the representation of the **first sub-token** as the input to the token-level classifier over the NER label set.
 
 ## Result
-| type | f1 | val |
+| type | f1 | diff |
 | --- | --- | --- |
-| reproduce | dev-micro-f1 | **96.08** |
-| paper | dev-f1 | 96.4 |
+| reproduce | 96.08 | (0.32) |
+| paper | 96.4 | |
 
 | type | O | B-PER | I-PER | B-ORG | I-ORG | B-LOC | I-LOC | B-MISC | I-MISC |
 | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
@@ -38,17 +38,17 @@ In the input to BERT, we use a **case-preserving WordPiece** model, and we inclu
 we apply the feature-based approach by extracting the activations from one or more layers without fine-tuning any parameters of BERT. These contextual embeddings are used as input to a randomly initialized two-layer 768-dimensional BiLSTM before the classification layer.
 
 ## Result
-| model | source | f1 |
-| --- | --- | --- |
-| FEA_LAST_FOUR_CONCAT | reproduce | **** |
-| FEA_LAST_FOUR_CONCAT | paper | 96.1 |
-| FEA_SECOND_TO_LAST | reproduce | **** |
-| FEA_SECOND_TO_LAST | paper | 95.6 |
-| FEA_LAST_HIDDEN | reproduce | **** |
-| FEA_LAST_HIDDEN | paper | 94.9 |
-| FEA_EMBEDDINGS | reproduce | **** |
-| FEA_EMBEDDINGS | paper | 91.0 |
-| FEA_SUM_LAST_FOUR | reproduce | **** |
-| FEA_SUM_LAST_FOUR | paper | 95.9 |
-| FEA_SUM_TWELVE | reproduce | **** |
-| FEA_SUM_TWELVE | paper | 95.5 |
+| model | source | f1 | diff |
+| --- | --- | --- | --- |
+| FEA_LAST_FOUR_CONCAT | reproduce | 95.77 | (0.33) |
+| FEA_LAST_FOUR_CONCAT | paper | 96.1 |  |
+| FEA_SECOND_TO_LAST | reproduce | 94.93 | (0.67) |
+| FEA_SECOND_TO_LAST | paper | 95.6 |  |
+| FEA_LAST_HIDDEN | reproduce | 93.88 | (1.02) |
+| FEA_LAST_HIDDEN | paper | 94.9 |  |
+| FEA_EMBEDDINGS | reproduce | 91.32 | 0.32  |
+| FEA_EMBEDDINGS | paper | 91.0 |  |
+| FEA_SUM_LAST_FOUR | reproduce | 95.01 | (0.89) |
+| FEA_SUM_LAST_FOUR | paper | 95.9 |  |
+| FEA_SUM_TWELVE | reproduce | 95.11 | (0.39) |
+| FEA_SUM_TWELVE | paper | 95.5 |  |
