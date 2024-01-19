@@ -17,12 +17,21 @@ Experimental Reproduction of CoNLL-2003 NER in BERT paper
 | FEA_SUM_LAST_FOUR | feature based | last four hidden sum + BiLSTM |
 | FEA_SUM_TWELVE | feature based | all 12 hidden sum + BiLSTM |
 
+# HYPER_PARAMS
+- "n_epochs": 10
+- "batch_size": 64
+- "lr": 3e-4
+- "weight_decay": 0.01
+- "weight_balance": True
+
+The following results are all based on the hyperparameters above, run only once on 4-V100
+
 # FineTune based
 ## FT_TOKEN_SOFTMAX
 In the input to BERT, we use a **case-preserving WordPiece** model, and we include the maximal document context provided by the data. Following standard practice, we formulate this as a tagging task but do not use a CRF layer in the output. We use the representation of the **first sub-token** as the input to the token-level classifier over the NER label set.
 
 ## Result
-| type | f1 | diff |
+| source | f1 | diff |
 | --- | --- | --- |
 | reproduce | 96.08 | (0.32) |
 | paper | 96.4 | |
